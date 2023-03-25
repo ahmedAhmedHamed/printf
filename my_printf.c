@@ -31,19 +31,20 @@ va_start(args, format);
 for (i = 0; i < formatlength; i++)
 {
 
-if (format[i] == 's')
+if (format[i + 1] == 's')
 {
 char *str = va_arg(args, char *);
 charactersprinted += _strlen(str);
 write(1, str, _strlen(str));
 }
-else if (format[i] == 'c')
+else if (format[i + 1] == 'c')
 {
 int singlechar = va_arg(args, int);
 if (singlechar != '\0')
 charactersprinted++;
 write(1, &singlechar, 1);
 }
+i++;
 }
 va_end(args);
 return (charactersprinted);
