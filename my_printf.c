@@ -52,7 +52,6 @@ write(1, str, _strlen(str));
 else if (format[i + 1] == 'c')
 {
 int singlechar = va_arg(args, int);
-if (singlechar != '\0')
 charactersprinted++;
 write(1, &singlechar, 1);
 }
