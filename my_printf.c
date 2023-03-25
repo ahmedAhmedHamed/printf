@@ -18,12 +18,13 @@ return (len);
  * _printf - my own printf - this one can't do anything other than %s and %c
  * @format: format to print
  * @...: strings to print
- * Return: 1 always
+ * Return: the number of characters printed
  */
 int _printf(const char *format, ...)
 {
 va_list args;
 int i = 0;
+int charactersprinted = 0;
 int formatlength = _strlen(format);
 
 va_start(args, format);
@@ -33,17 +34,17 @@ for (i = 0; i < formatlength; i++)
 if (format[i] == 's')
 {
 char *str = va_arg(args, char *);
+charactersprinted += _strlen(str);
 write(1, str, _strlen(str));
 }
 else if (format[i] == 'c')
 {
 int singlechar = va_arg(args, int);
+if (singlechar != '\0')
+charactersprinted++;
 write(1, &singlechar, 1);
 }
-
 }
-
 va_end(args);
-return (1);
+return (charactersprinted);
 }
-
