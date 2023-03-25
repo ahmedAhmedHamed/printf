@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _strlen - helo
  * @s: number
@@ -34,6 +33,14 @@ if (format[i] != '%')
 {
 write(1, &format[i], 1);
 charactersprinted++;
+continue;
+}
+if (format[i] != 's' && format[i] != 'c')
+{
+write(1, &format[i], 1);
+charactersprinted++;
+if (format[i + 1] == '%')
+i++;
 continue;
 }
 if (format[i + 1] == 's')
