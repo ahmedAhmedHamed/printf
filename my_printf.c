@@ -33,6 +33,7 @@ for (i = 0; i < formatlength; i++)
 if (format[i] != '%')
 {
 write(1, &format[i], 1);
+charactersprinted++;
 continue;
 }
 if (format[i + 1] == 's')
