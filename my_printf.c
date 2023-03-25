@@ -35,7 +35,7 @@ write(1, &format[i], 1);
 charactersprinted++;
 continue;
 }
-if (format[i] != 's' && format[i] != 'c')
+if (format[i + 1] != 's' && format[i + 1] != 'c')
 {
 write(1, &format[i], 1);
 charactersprinted++;
