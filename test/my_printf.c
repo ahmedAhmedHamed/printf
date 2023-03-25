@@ -10,7 +10,10 @@ int _strlen(const char *s)
 int len;
 len = 0;
 while (s[len] != '\0')
+{
+s[len];
 len++;
+}
 return (len);
 }
 
@@ -23,10 +26,11 @@ return (len);
 int _printf(const char *format, ...)
 {
 va_list args;
-int i = 0;
+unsigned int i = 0;
+int j = 0;
 int formatlength = _strlen(format);
 
-va_start(args, format);
+va_start(args, formatlength);
 for (i = 0; i < formatlength; i++) {
 
 if (format[i] == 's')
