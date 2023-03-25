@@ -27,7 +27,8 @@ int i = 0;
 int formatlength = _strlen(format);
 
 va_start(args, format);
-for (i = 0; i < formatlength; i++) {
+for (i = 0; i < formatlength; i++)
+{
 
 if (format[i] == 's')
 {
