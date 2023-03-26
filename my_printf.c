@@ -19,11 +19,6 @@ int _isDigit(int digit)
     return(digit >= 48 && digit <= 57);
 }
 
-int isIdentifier(const char *format, int i)
-{
-    return (format[i + 1] != 's' && format[i + 1] != 'c');
-}
-
 /**
  * _printf - my own printf - this one can't do anything other than %s and %c
  * @format: format to print
@@ -48,7 +43,7 @@ charactersprinted++;
 continue;
 }
 
-if (isIdentifier(format, i))/*if character after % is not s or c then print %*/
+if (format[i + 1] != 's' && format[i + 1] != 'c')/*if character after % is not s or c then print %*/
 {
 write(1, &format[i], 1);
 charactersprinted++;
