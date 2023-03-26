@@ -21,6 +21,8 @@ return (len);
  */
 int _printf(const char *format, ...)
 {
+if (format == 0)
+return (0);
 va_list args;
 int i = 0;
 int charactersprinted = 0;
