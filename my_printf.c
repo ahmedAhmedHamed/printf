@@ -27,6 +27,9 @@ int _printf(const char *format, ...)
     int charactersprinted = 0;
     int formatlength = _strlen(format);
 
+if (format == 0)
+        return(-1);
+
     va_start(args, format);/*start of args loop*/
     for (i = 0; i < formatlength; i++)
     {
