@@ -31,6 +31,9 @@ int _printf(const char *format, ...)
     if (formatlength == -1)
         return (-1);
 
+    if (format[0] == '%' && format[1] == ' ' && !format[2])
+        return (-1);
+
 
     va_start(args, format);/*start of args loop*/
     for (i = 0; i < formatlength; i++)
@@ -47,8 +50,6 @@ int _printf(const char *format, ...)
 
         if (format[i] + 1 == '\0')
             return(-1);
-
-
 
         if (format[i + 1] != 's' && format[i + 1] != 'c')/*if character after % is not s or c then print %*/
         {
