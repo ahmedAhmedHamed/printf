@@ -1,3 +1,4 @@
+#include "main.h"
 #include <unistd.h>
 #include <stdarg.h>
 
@@ -34,13 +35,12 @@ int isIdentifier(const char *format, int i)
  */
 int _printf(const char *format, ...)
 {
-if (format == 0)
-return (0);
 va_list args;
 int i = 0;
 int charactersprinted = 0;
 int formatlength = _strlen(format);
-
+if (format == 0)
+return (0);
 va_start(args, format);/*start of args loop*/
 for (i = 0; i < formatlength; i++)
 {
