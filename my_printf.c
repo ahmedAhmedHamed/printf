@@ -42,11 +42,13 @@ int _printf(const char *format, ...)
             continue;
         }
 
+        while (format[i + 1] == ' ')
+            i++;
+
         if (format[i] + 1 == '\0')
             return(-1);
 
-        while (format[i + 1] == ' ')
-            i++;
+
 
         if (format[i + 1] != 's' && format[i + 1] != 'c')/*if character after % is not s or c then print %*/
         {
