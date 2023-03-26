@@ -39,8 +39,6 @@ va_list args;
 int i = 0;
 int charactersprinted = 0;
 int formatlength = _strlen(format);
-if (format == 0)
-return (0);
 va_start(args, format);/*start of args loop*/
 for (i = 0; i < formatlength; i++)
 {
@@ -63,6 +61,8 @@ continue;
 if (format[i + 1] == 's')/*identifier is string, print the string*/
 {
 char *str = va_arg(args, char *);
+if (str == 0)
+str = "(null)";
 charactersprinted += _strlen(str);
 write(1, str, _strlen(str));
 }
