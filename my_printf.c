@@ -7,6 +7,8 @@
 int _strlen(const char *s)
 {
 int len;
+if (s == 0)
+    return (-1);
 len = 0;
 while (s[len] != '\0')
 len++;
@@ -26,9 +28,9 @@ int _printf(const char *format, ...)
     int i = 0;
     int charactersprinted = 0;
     int formatlength = _strlen(format);
+    if (formatlength == -1)
+        return (-1);
 
-if (format == 0)
-        return(-1);
 
     va_start(args, format);/*start of args loop*/
     for (i = 0; i < formatlength; i++)
@@ -39,6 +41,7 @@ if (format == 0)
             charactersprinted++;
             continue;
         }
+
 
         if (format[i + 1] != 's' && format[i + 1] != 'c')/*if character after % is not s or c then print %*/
         {
