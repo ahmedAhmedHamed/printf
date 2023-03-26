@@ -39,10 +39,12 @@ int _printf(const char *format, ...)
 
         if (format[i + 1] != 's' && format[i + 1] != 'c')/*if character after % is not s or c then print %*/
         {
+            if (format[i + 1] == '\0')/*if % has % after it increment i*/
+                continue;
             write(1, &format[i], 1);
             charactersprinted++;
-            if (format[i + 1] == '%')/*if % has % after it increment i*/
-                i++;
+            if (format[i + 1] == '%')
+            i++;
             continue;
         }
 
