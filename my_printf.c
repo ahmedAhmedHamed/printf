@@ -59,7 +59,7 @@ int _printf(const char *format, ...)
 
         else if (format[i + 1] == 'c')/*identifier is char, print the character*/
         {
-            int singlechar = va_arg(args, int);
+            char singlechar = va_arg(args, int);
             charactersprinted++;
             write(1, &singlechar, 1);
         }
