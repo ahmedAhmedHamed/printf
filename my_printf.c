@@ -50,7 +50,8 @@ int _printf(const char *format, ...)
         if (format[i + 1] == 's')/*identifier is string, print the string*/
         {
             char *str = va_arg(args, char *);
-    
+                       if (str == 0)
+                str = "(null)"; 
             charactersprinted += _strlen(str);
             write(1, str, _strlen(str));
         }
