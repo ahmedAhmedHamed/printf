@@ -42,6 +42,9 @@ int _printf(const char *format, ...)
             continue;
         }
 
+        if (format[i] + 1 == '\0')
+            return(-1);
+
 
         if (format[i + 1] != 's' && format[i + 1] != 'c')/*if character after % is not s or c then print %*/
         {
