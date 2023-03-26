@@ -1,4 +1,4 @@
-#include "main.h"
+#include "main.h"/*yeet*/
 /**
  * _strlen - helo
  * @s: number
@@ -72,7 +72,6 @@ int _printf(const char *format, ...)
         else if (format[i + 1] == 'c')/*identifier is char, print the character*/
         {
             char singlechar = va_arg(args, int);
-            if (singlechar != '\0')
             charactersprinted++;
             write(1, &singlechar, 1);
         }
