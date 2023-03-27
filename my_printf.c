@@ -122,7 +122,7 @@ int chooseFunction(const char *format,int i)
         return (4);
     else if(format[i + 1] == 'o')
         return (5);
-    else if (format[i + 1] != 'x' && format[i + 1] != 'X')
+    else if (format[i + 1] == 'x' || format[i + 1] == 'X')
         return (6);
     else
         return (-1);
