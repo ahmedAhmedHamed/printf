@@ -103,7 +103,6 @@ int ouratoi(char *s)
     int number = 0;
     int i;
     for (i = 0; i < _strlen(s); i++)
-
         number = number * 10 + (s[i] - 48);
     return number;
 }
@@ -122,8 +121,10 @@ int chooseFunction(const char *format,int i)
         return (4);
     else if(format[i + 1] == 'o')
         return (5);
-    else if (format[i + 1] == 'x' || format[i + 1] == 'X')
+    else if (format[i + 1] == 'x')
         return (6);
+    else if (format[i + 1] == 'X')
+        return (7);
     else
         return (-1);
 }
@@ -224,9 +225,45 @@ int processIdentifier(const char * format, int i, va_list args)
     else if (choice == 6)
     {
         int digit = va_arg(args, int);
+        charactersprinted += printNonDecimalsmol(digit, 16);
+    }
+    else if (choice == 7)
+    {
+        int digit = va_arg(args, int);
         charactersprinted += printNonDecimal(digit, 16);
     }
+
     return (charactersprinted);
+}
+
+int printNonDecimalsmol(int number, int base)
+{
+    int charactersPrinted = 0;
+    int i;
+    if (number > base)
+    {
+        charactersPrinted += printNonDecimal(number / base, base);
+        if (number % base > 9)
+        {
+            i = (number % base) + 97 - 10;
+            print_char(i);
+            charactersPrinted++;
+            return (charactersPrinted);
+        }
+        charactersPrinted += print_int(number % base);
+    }
+    else
+    {
+        if (number > 9)
+        {
+            number = number + 97 - 10;
+            print_char(number);
+            charactersPrinted++;
+            return (charactersPrinted);
+        }
+        charactersPrinted += print_int(number);
+    }
+    return (charactersPrinted);
 }
 
 int processFunction(const char *format, va_list args)
@@ -276,7 +313,7 @@ int printNonDecimal(int number, int base) {
         charactersPrinted += printNonDecimal(number / base, base);
         if (number % base > 9)
         {
-            i = (number % base) + 65 - 9;
+            i = (number % base) + 65 - 10;
             print_char(i);
             charactersPrinted++;
             return (charactersPrinted);
@@ -287,7 +324,7 @@ int printNonDecimal(int number, int base) {
     {
         if (number > 9)
         {
-            number = number + 65 - 9;
+            number = number + 65 - 10;
             print_char(number);
             charactersPrinted++;
             return (charactersPrinted);

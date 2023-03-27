@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdlib.h>
-
 char *to_str(int number);
 char *from_unsignedInt_to_str(unsigned int number);
 int _strlen(const char *s);
@@ -23,4 +22,5 @@ int processFunction(const char *format, va_list args);
 int printNonDecimal(int number, int base);
 int printS(char *str);
 int _printf(const char *format, ...);
+int printNonDecimalsmol(int number, int base);
 #endif
