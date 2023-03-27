@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdlib.h>
+
 /**
  * to_str - hello
  * @number: s
@@ -62,15 +64,15 @@ int getintLength(int myInt)
 
 int ouratoi(char *s)
 {
-
     int number = 0;
-    for (int i = 0; i < _strlen(s); i++)
+    int i;
+    for (i = 0; i < _strlen(s); i++)
 
         number = number * 10 + (s[i] - 48);
     return number;
 }
 
-int chooseFunction(char *format,int i)
+int chooseFunction(const char *format,int i)
 {
     if (format[i + 1] == 's')
     {
@@ -104,11 +106,12 @@ int print_char(char c)
 
 int print_int(int number)
 {
+    int length;
     if (number < 0)
     {
         write(1, "-", 1);
     }
-    int length = getintLength(number);
+    length = getintLength(number);
     write(1, to_str(number), length);
     if (number < 0)
         length++;
@@ -139,9 +142,10 @@ int processIdentifier(const char * format, int i, va_list args)
         int digit = va_arg(args, int);
         charactersprinted += print_int(digit);
     }
+    return (-1);
 }
 
-int processFunction(char *format, va_list args)
+int processFunction(const char *format, va_list args)
 {
     int i;
     int formatlength = _strlen(format);
@@ -191,7 +195,6 @@ int _printf(const char *format, ...)
 {
     int formatlength = _strlen(format);
     va_list args;
-    int i = 0;
     int charactersprinted = 0;
 
     if (formatlength == -1)
