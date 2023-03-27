@@ -1,3 +1,6 @@
+#include <unistd.h>
+#include <stdarg.h>
+#include <stdlib.h>
 #include "main.h"
 /**
  * to_str - hello
