@@ -30,6 +30,33 @@ char *to_str(int number)
     str[len] = '\0';
     return (str) ;
 }
+char *from_unsignedInt_to_str(unsigned int number)
+{
+    unsigned int i, LSD, len = 0, n;
+    char *str;
+    n = number;
+
+    while (n != 0)
+    {
+        len++;
+        n /= 10;
+    }
+    if (number == 0)/*check this later*/
+    {
+        len = 2;
+    }
+        str = malloc(len);
+    for (i = 0; i < len; i++)
+    {
+        LSD = number % 10;
+        number = number / 10;
+        if (LSD < 0)
+            LSD *= -1;
+        str[len - (i + 1)] = LSD + '0';
+    }
+    str[len] = '\0';
+    return (str) ;
+}
 
 /**
  * _strlen - helo
@@ -50,6 +77,22 @@ int _strlen(const char *s)
 int getintLength(int myInt)
 {
     int size = 0;
+    while(myInt)
+    {
+        myInt /= 10;
+        size++;
+    }
+    if (size == 0)
+        return (1);
+    return (size);
+}
+int getUnsignedintLength(unsigned int myInt)
+{
+    unsigned int size = 0;
+    if (myInt < 0)
+    {
+        myInt = 4294967295 + myInt;
+    }
     while(myInt)
     {
         myInt /= 10;
@@ -87,6 +130,10 @@ int chooseFunction(const char *format,int i)
     else if (format[i + 1] == 'b')
     {
         return (3);
+    }
+    else if (format[i + 1] == 'u')
+    {
+        return (4);
     }
     else
         return (-1);
@@ -131,12 +178,21 @@ int printUnsignedIntToBinary(unsigned int number)
         print_char('1');
     return (x + 1);
 }
+int printUnsignedInt(unsigned int number)
+{
+    unsigned int length;
+    length = getUnsignedintLength(number);
+    if (number == 0)
+        return (0);
+    write(1, from_unsignedInt_to_str(number), length);
+    return (length);
+}
 
 int verifyIdentifier(const char * format, int i)
 {
     return (format[i + 1] != 's' && format[i + 1] != 'c'
     && format[i + 1] != 'i' && format[i + 1] != 'd'
-    && format[i + 1] != 'b');
+    && format[i + 1] != 'b' && format[i + 1] != 'u');
 }
 
 int processIdentifier(const char * format, int i, va_list args)
@@ -163,6 +219,12 @@ int processIdentifier(const char * format, int i, va_list args)
         unsigned int digit = va_arg(args, unsigned int);
 
         charactersprinted += printUnsignedIntToBinary(digit);
+    }
+    else if (choice == 4)
+    {
+        unsigned int digit = va_arg(args, unsigned int);
+
+        charactersprinted += printUnsignedInt(digit);
     }
     return (charactersprinted);
 }
@@ -227,3 +289,4 @@ int _printf(const char *format, ...)
     va_end(args);/*end of args loop*/
     return (charactersprinted);
 }
+
