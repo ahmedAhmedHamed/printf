@@ -122,6 +122,8 @@ int chooseFunction(const char *format,int i)
         return (4);
     else if(format[i + 1] == 'o')
         return (5);
+    else if (format[i + 1] != 'x' && format[i + 1] != 'X')
+        return (6);
     else
         return (-1);
 }
@@ -178,7 +180,8 @@ int verifyIdentifier(const char * format, int i)
     return (format[i + 1] != 's' && format[i + 1] != 'c'
             && format[i + 1] != 'i' && format[i + 1] != 'd'
             && format[i + 1] != 'b' && format[i + 1] != 'u'
-            && format[i + 1] != 'o');
+            && format[i + 1] != 'o' && format[i + 1] != 'x'
+            && format[i + 1] != 'X');
 }
 
 int processIdentifier(const char * format, int i, va_list args)
@@ -217,6 +220,11 @@ int processIdentifier(const char * format, int i, va_list args)
         int digit = va_arg(args, unsigned int);
 
         charactersprinted += printNonDecimal(digit, 8);
+    }
+    else if (choice == 6)
+    {
+        int digit = va_arg(args, int);
+        charactersprinted += printNonDecimal(digit, 16);
     }
     return (charactersprinted);
 }
