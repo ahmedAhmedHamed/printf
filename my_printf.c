@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdlib.h>
 
 /**
  * to_str - hello
@@ -86,6 +85,10 @@ int chooseFunction(const char *format,int i)
     {
         return (2);
     }
+    else if (format[i + 1] == 'b')
+    {
+        return (3);
+    }
     else
         return (-1);
 }
@@ -117,10 +120,24 @@ int print_int(int number)
         length++;
     return (length);
 }
+int printUnsignedIntToBinary(unsigned int number)
+{
+    int x;
+    if (number == 0)
+        return (0);
+    x = printUnsignedIntToBinary(number / 2);
+    if (number % 2 == 0)
+        printf("0");
+    else
+        printf("1");
+    return (x + 1);
+}
 
 int verifyIdentifier(const char * format, int i)
 {
-    return (format[i + 1] != 's' && format[i + 1] != 'c' && format[i + 1] != 'i' && format[i + 1] != 'd');
+    return (format[i + 1] != 's' && format[i + 1] != 'c'
+    && format[i + 1] != 'i' && format[i + 1] != 'd'
+    && format[i + 1] != 'b');
 }
 
 int processIdentifier(const char * format, int i, va_list args)
@@ -142,8 +159,13 @@ int processIdentifier(const char * format, int i, va_list args)
         int digit = va_arg(args, int);
         charactersprinted += print_int(digit);
     }
-        return (charactersprinted);
+    else if (choice == 3)
+    {
+        unsigned int digit = va_arg(args, unsigned int);
 
+        charactersprinted += printUnsignedIntToBinary(digit);
+    }
+    return (charactersprinted);
 }
 
 int processFunction(const char *format, va_list args)
