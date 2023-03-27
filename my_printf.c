@@ -1,7 +1,8 @@
-#include <unistd.h>
-#include <stdarg.h>
-#include <stdlib.h>
 #include "main.h"
+
+
+
+
 /**
  * to_str - hello
  * @number: s
@@ -21,7 +22,7 @@ char *to_str(int number)
     {
         len = 2;
     }
-        str = malloc(len);
+    str = malloc(len);
     for (i = 0; i < len; i++)
     {
         LSD = number % 10;
@@ -48,7 +49,7 @@ char *from_unsignedInt_to_str(unsigned int number)
     {
         len = 2;
     }
-        str = malloc(len);
+    str = malloc(len);
     for (i = 0; i < len; i++)
     {
         LSD = number % 10;
@@ -119,25 +120,17 @@ int ouratoi(char *s)
 int chooseFunction(const char *format,int i)
 {
     if (format[i + 1] == 's')
-    {
         return (0);
-    }
     else if (format[i + 1] == 'c')
-    {
         return (1);
-    }
     else if (format[i + 1] == 'd' || format[i + 1] == 'i')
-    {
         return (2);
-    }
     else if (format[i + 1] == 'b')
-    {
         return (3);
-    }
     else if (format[i + 1] == 'u')
-    {
         return (4);
-    }
+    else if(format[i + 1] == 'o')
+        return (5);
     else
         return (-1);
 }
@@ -171,7 +164,7 @@ int print_int(int number)
 }
 int printUnsignedIntToBinary(unsigned int number)
 {
-    int x;
+    unsigned int x;
     if (number == 0)
         return (0);
     x = printUnsignedIntToBinary(number / 2);
@@ -183,10 +176,8 @@ int printUnsignedIntToBinary(unsigned int number)
 }
 int printUnsignedInt(unsigned int number)
 {
-    unsigned int length;
+    int length;
     length = getUnsignedintLength(number);
-    if (number == 0)
-        return (0);
     write(1, from_unsignedInt_to_str(number), length);
     return (length);
 }
@@ -194,8 +185,9 @@ int printUnsignedInt(unsigned int number)
 int verifyIdentifier(const char * format, int i)
 {
     return (format[i + 1] != 's' && format[i + 1] != 'c'
-    && format[i + 1] != 'i' && format[i + 1] != 'd'
-    && format[i + 1] != 'b' && format[i + 1] != 'u');
+            && format[i + 1] != 'i' && format[i + 1] != 'd'
+            && format[i + 1] != 'b' && format[i + 1] != 'u'
+            && format[i + 1] != 'o');
 }
 
 int processIdentifier(const char * format, int i, va_list args)
@@ -228,6 +220,12 @@ int processIdentifier(const char * format, int i, va_list args)
         unsigned int digit = va_arg(args, unsigned int);
 
         charactersprinted += printUnsignedInt(digit);
+    }
+    else if (choice == 5)
+    {
+        int digit = va_arg(args, unsigned int);
+
+        charactersprinted += printNonDecimal(digit, 8);
     }
     return (charactersprinted);
 }
@@ -269,6 +267,57 @@ int processFunction(const char *format, va_list args)
         i++;/*i needs to be incremented if an identifier is used in order to not print the identification character*/
     }
     return (charactersprinted);
+}
+
+int printNonDecimal(int number, int base) {
+    int charactersPrinted = 0;
+    int i;
+    if (number > base)
+    {
+        charactersPrinted += printNonDecimal(number / base, base);
+        if (number % base > 9)
+        {
+            i = (number % base) + 65 - 9;
+            print_char(i);
+            charactersPrinted++;
+            return (charactersPrinted);
+        }
+        charactersPrinted += print_int(number % base);
+    }
+    else
+    {
+        if (number > 9)
+        {
+            number = number + 65 - 9;
+            print_char(number);
+            charactersPrinted++;
+            return (charactersPrinted);
+        }
+        charactersPrinted += print_int(number);
+    }
+    return (charactersPrinted);
+}
+
+int printS(char *str)
+{
+    int i = 0;
+    int length;
+    if (str == 0)
+        str = "(null)";
+    length = _strlen(str);
+    for (i = 0; i < length; i++)
+    {
+        if ((str[i] < 32 && str[i] > 0) || str[i] >= 127)
+        {
+
+        }
+        else
+        {
+            print_char(str[i]);
+        }
+    }
+    write(1, str, length);
+    return (length);
 }
 
 /**
