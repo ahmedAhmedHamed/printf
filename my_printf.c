@@ -142,7 +142,8 @@ int processIdentifier(const char * format, int i, va_list args)
         int digit = va_arg(args, int);
         charactersprinted += print_int(digit);
     }
-    return (-1);
+        return (charactersprinted);
+
 }
 
 int processFunction(const char *format, va_list args)
