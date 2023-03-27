@@ -1,8 +1,5 @@
 #include "main.h"
 
-
-
-
 /**
  * to_str - hello
  * @number: s
@@ -54,8 +51,6 @@ char *from_unsignedInt_to_str(unsigned int number)
     {
         LSD = number % 10;
         number = number / 10;
-        if (LSD < 0)
-            LSD *= -1;
         str[len - (i + 1)] = LSD + '0';
     }
     str[len] = '\0';
@@ -92,11 +87,7 @@ int getintLength(int myInt)
 }
 int getUnsignedintLength(unsigned int myInt)
 {
-    unsigned int size = 0;
-    if (myInt < 0)
-    {
-        myInt = 4294967295 + myInt;
-    }
+    int size = 0;
     while(myInt)
     {
         myInt /= 10;
@@ -341,4 +332,3 @@ int _printf(const char *format, ...)
     va_end(args);/*end of args loop*/
     return (charactersprinted);
 }
-

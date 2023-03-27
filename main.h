@@ -1,7 +1,3 @@
-//
-// Created by Stan on 3/28/2023.
-//
-
 #ifndef ALGOS_MAIN_H
 #define ALGOS_MAIN_H
 #include <stdio.h>
