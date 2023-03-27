@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * to_str - hello
  * @number: s
@@ -127,9 +126,9 @@ int printUnsignedIntToBinary(unsigned int number)
         return (0);
     x = printUnsignedIntToBinary(number / 2);
     if (number % 2 == 0)
-        printf("0");
+        print_char('0');
     else
-        printf("1");
+        print_char('1');
     return (x + 1);
 }
 
