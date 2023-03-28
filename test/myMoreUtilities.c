@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * print_string - hello
+ * @str: s
+ * Return: s
+ */
 int print_string(char * str)
 {
     if (str == 0)
@@ -8,12 +13,22 @@ int print_string(char * str)
     return (_strlen(str));
 }
 
+/**
+ * print_char - hello
+ * @c: s
+ * Return: s
+ */
 int print_char(char c)
 {
     write(1, &c, 1);
     return (1);
 }
 
+/**
+ * print_int - hello
+ * @number: s
+ * Return: s
+ */
 int print_int(int number)
 {
     int length;
@@ -28,6 +43,11 @@ int print_int(int number)
     return (length);
 }
 
+/**
+ * printUnsignedIntToBinary - hello
+ * @number s
+ * Return: s
+ */
 int printUnsignedIntToBinary(unsigned int number)
 {
     unsigned int x;
@@ -41,6 +61,11 @@ int printUnsignedIntToBinary(unsigned int number)
     return (x + 1);
 }
 
+/**
+ * printUnsignedInt - hello
+ * @number: s
+ * Return: s
+ */
 int printUnsignedInt(unsigned int number)
 {
     int length;
