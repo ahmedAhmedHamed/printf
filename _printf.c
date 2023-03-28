@@ -390,7 +390,8 @@ int printS(char *str)
     {
         if ((str[i] < 32 && str[i] > 0) || str[i] >= 127)
         {
-
+            print_string("\\x");
+            printNonDecimal(str[i], 16);
         }
         else
         {
