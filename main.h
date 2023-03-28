@@ -24,3 +24,4 @@ int printS(char *str);
 int _printf(const char *format, ...);
 int printNonDecimalsmol(int number, int base);
 #endif
+
