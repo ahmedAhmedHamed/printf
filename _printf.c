@@ -400,6 +400,7 @@ int printS(char *str)
     write(1, str, length);
     return (length);
 }
+
 /**
  * processFunction - hello
  * @format: s
