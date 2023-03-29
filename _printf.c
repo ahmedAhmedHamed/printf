@@ -227,6 +227,8 @@ int chooseFunction(const char *format,int i)
         return (6);
     else if (format[i + 1] == 'X')
         return (7);
+    else if (format[i + 1] == 'S')
+        return (8);
     else
         return (-1);
 }
@@ -299,6 +301,11 @@ int processIdentifier(const char * format, int i, va_list args)
     {
         int digit = va_arg(args, int);
         charactersprinted += printNonDecimal(digit, 16);
+    }
+    else if (choice == 8)
+    {
+        char *str = va_arg(args, char *);
+        charactersprinted += printS(str);
     }
     return (charactersprinted);
 }
